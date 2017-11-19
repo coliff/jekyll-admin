@@ -8,8 +8,6 @@ module.exports = {
   primaryColor: '#ff9900',
   secondaryColor: '#f4f4f4',
   thirdColor: '#808080',
+  darkGray: '#222',
   textColor: '#000',
-  titleColor: '#4c4c4c',
-  smoothDangerColor: 'rgba(255,0,0,.05)',
-  dangerColor: 'red',
 };

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import withApi from '../utils/withApi';
-import { getConfiguration } from '../config/api';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import logoImg from './logo.png';
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-class Main extends Component {
+export default class Main extends Component {
   state = {
     collapsed: false,
   };
@@ -18,55 +18,48 @@ class Main extends Component {
   render() {
     console.log(this.props);
     return (
-      <Layout style={{ minHeight: '100vh' }}>
+      <StyledLayout>
         <Sider
           collapsible
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
         >
-          <Logo />
+          <LogoWrapper>
+            <Logo src={logoImg} />
+          </LogoWrapper>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span>Option 1</span>
+            <Menu.Item>
+              <Icon type="file-text" />
+              <span>Pages</span>
             </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="desktop" />
-              <span>Option 2</span>
+            <Menu.Item>
+              <Icon type="file-ppt" />
+              <span>Posts</span>
             </Menu.Item>
             <SubMenu
-              key="sub1"
               title={
                 <span>
-                  <Icon type="user" />
-                  <span>User</span>
+                  <Icon type="book" />
+                  <span>Collections</span>
                 </span>
               }
             >
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
+              <Menu.Item>Tom</Menu.Item>
+              <Menu.Item>Bill</Menu.Item>
+              <Menu.Item>Alex</Menu.Item>
             </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <Icon type="team" />
-                  <span>Team</span>
-                </span>
-              }
-            >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9">
+            <Menu.Item>
+              <Icon type="hdd" />
+              <span>Data Files</span>
+            </Menu.Item>
+            <Menu.Item>
               <Icon type="file" />
-              <span>File</span>
+              <span>Static Files</span>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          <StyledHeader>Your awesome title</StyledHeader>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
@@ -76,12 +69,20 @@ class Main extends Component {
           </Content>
           <Footer>Jekyll Admin © 2017</Footer>
         </Layout>
-      </Layout>
+      </StyledLayout>
     );
   }
 }
 
-export default withApi(getConfiguration, Main);
+const StyledLayout = styled(Layout)`
+  min-height: 100vh;
+`;
+
+const StyledHeader = styled(Header)`
+  background: #fff;
+  padding: 0 16px;
+  font-weight: bold;
+`;
 
 const ContentBody = styled.div`
   padding: 24px;
@@ -89,9 +90,12 @@ const ContentBody = styled.div`
   min-height: 360;
 `;
 
-const Logo = styled.div`
-  height: 32px;
-  background: #333;
-  border-radius: 6px;
-  margin: 16px;
+const LogoWrapper = styled.div`
+  text-align: center;
+  padding: 10px 0;
+  background: ${props => props.theme.darkGray};
+`;
+
+const Logo = styled.img`
+  height: 39px;
 `;
